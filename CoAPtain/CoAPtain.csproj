@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.1</Version>
+    <Authors>Jakub Findura</Authors>
+    <Company>jCube</Company>
+    <Description>CoAPtain - at your service. Merging CoAP with ASP.NET Core</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright @ 2020 Jakub Findura</Copyright>
+    <PackageTags>CoAP</PackageTags>
+    <PackageProjectUrl>https://github.com/jakubfindura/CoAPtain</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jakubfindura/CoAPtain</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>CoAPtain.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Com.AugustCellars.CoAP" Version="1.7.0" />
+  </ItemGroup>
+
+</Project>
