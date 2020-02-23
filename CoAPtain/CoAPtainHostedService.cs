@@ -45,10 +45,16 @@ namespace CoAPtain
 
             server = new CoapServer();
 
-            foreach (var r in options.Value.Resources)
+            foreach (var endpoint in options.Value.EndPoints)
             {
-                server.Add(r.Item1, r.Item2);
-                logger.LogTrace($"Registering resource {r.Item2.Name}, path={r.Item2.Path}");
+                server.AddEndPoint(endpoint);
+                logger.LogTrace($"Registering end point {endpoint.ToString()}");
+            }
+
+            foreach (var resource in options.Value.Resources)
+            {
+                server.Add(resource.Item1, resource.Item2);
+                logger.LogTrace($"Registering resource {resource.Item2.Name}, path={resource.Item2.Path}");
             }
 
             server.Start();

@@ -11,7 +11,9 @@
  * furnished to do so, subject to the following conditions:
  */
 
+using Com.AugustCellars.CoAP.Net;
 using Com.AugustCellars.CoAP.Server.Resources;
+using System;
 using System.Collections.Generic;
 
 namespace CoAPtain
@@ -21,7 +23,8 @@ namespace CoAPtain
     /// </summary>
     public class CoAPtainOptions
     {
-        private ICollection<(string, Resource)> resources;
+        private readonly ICollection<(string, Resource)> resources;
+        private readonly ICollection<IEndPoint> endpoints;
 
         /// <summary>
         /// List of <see cref="Resource"/>, which will be added to CoAP server
@@ -29,11 +32,17 @@ namespace CoAPtain
         public IEnumerable<(string, Resource)> Resources => resources;
 
         /// <summary>
+        /// List of <see cref="IEndPoint"/>, which will be used by the CoAP server.
+        /// </summary>
+        public IEnumerable<IEndPoint> EndPoints => endpoints;
+
+        /// <summary>
         /// Initializes a instance of <see cref="CoAPtainOptions"/>.
         /// </summary>
         public CoAPtainOptions()
         {
             resources = new List<(string, Resource)>();
+            endpoints = new List<IEndPoint>();
         }
 
         /// <summary>
@@ -42,6 +51,7 @@ namespace CoAPtain
         /// <param name="resource">Resource to add</param>
         public void AddResource(Resource resource)
         {
+            if (resource == null) throw new ArgumentNullException($"resource cannot be null");
             AddResource("", resource);
         }
 
@@ -52,7 +62,19 @@ namespace CoAPtain
         /// <param name="resource">Resource to add</param>
         public void AddResource(string path, Resource resource)
         {
+            if (resource == null) throw new ArgumentNullException($"resource cannot be null");
             resources.Add((path, resource));
         }
+
+        /// <summary>
+        /// Add a <see cref="IEndPoint"/> to CoAP server.
+        /// </summary>
+        /// <param name="endPoint">End point to add</param>
+        public void AddEndPoint(IEndPoint endPoint)
+        {
+            if (endPoint == null) throw new ArgumentNullException($"endpoint cannot be null");
+            endpoints.Add(endPoint);
+        }
+
     }
 }
