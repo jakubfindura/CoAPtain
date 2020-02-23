@@ -12,6 +12,7 @@
  */
 
 using CoAPtain;
+using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -24,9 +25,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Register CoAPtain to <see cref="IServiceCollection"/>
         /// </summary>
-        public static IServiceCollection AddCoAPtain(this IServiceCollection services)
+        public static IServiceCollection AddCoAPtain(this IServiceCollection services, Action<CoAPtainOptions> action)
         {
             services.AddHostedService<CoAPtainHostedService>();
+
+            services.Configure(action);
 
             return services;
         }
